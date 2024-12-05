@@ -3,11 +3,11 @@
 간단하게 FastAPI와 Poetry + Sentry을 사용하는 템플릿입니다.
 
 ## 야미
-FastAPI X Poetry와 함께 쓰세요
-app/ : 주요 코드
-app/core/ : 서버에 핵심 기능 (response, error, deps 등)
-app/router/ : fastapi.APIRouter
-app/schema/ : response나 DTO를 위한 pydantic 모델
+FastAPI X Poetry와 함께 쓰세요.   
+app/ : 주요 코드  
+app/core/ : 서버에 핵심 기능 (response, error, deps 등)  
+app/router/ : fastapi.APIRouter.  
+app/schema/ : response나 DTO를 위한 pydantic 모델.  
 
 
 ## 설정 파일
