@@ -2,20 +2,17 @@ import os
 import logging
 from logging.handlers import RotatingFileHandler
 
-from app.env_validator import get_settings
+from app.core.config import settings
 
-settings = get_settings()
 log_format = (
     "%(asctime)s - %(name)s - %(levelname)s - %(message)s " "(%(filename)s:%(lineno)d)"
 )
 
 
-def service_logger(name):
+def use_logger(name):
     logger = logging.getLogger(name)
 
-    env = settings.APP_ENV.lower()
-
-    if env == "development" or env == "testing":
+    if settings.ENVIRONMENT == "local":
         logger.setLevel(logging.INFO)
 
         log_dir = "logs"
@@ -39,7 +36,7 @@ def service_logger(name):
         logger.addHandler(file_handler)
         logger.addHandler(console_handler)
 
-    elif env == "production":
+    elif settings.ENVIRONMENT == "production" or settings.ENVIRONMENT == "staging":
         logger.setLevel(logging.ERROR)
 
         console_handler = logging.StreamHandler()
@@ -51,6 +48,6 @@ def service_logger(name):
         logger.addHandler(console_handler)
 
     else:
-        raise ValueError(f"Unknown environment: {env}")
+        raise ValueError(f"Unknown environment: {settings.ENVIRONMENT}")
 
     return logger
